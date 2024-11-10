@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebApplicationHamburgueriaMvc.Context;
+using WebApplicationHamburgueriaMvc.Models;
 using WebApplicationHamburgueriaMvc.Repositories;
 using WebApplicationHamburgueriaMvc.Repositories.Interfaces;
 
@@ -23,7 +24,9 @@ namespace WebApplicationHamburgueriaMvc
             services.AddTransient<ICategoriaRepository, CategoriaRepository>();
             
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            
+
+            services.AddScoped(isp => CarrinhoCompra.GetCarrinho(isp));
+
             services.AddControllersWithViews();
 
             services.AddMemoryCache();
