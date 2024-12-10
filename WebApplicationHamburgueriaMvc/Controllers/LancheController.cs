@@ -25,16 +25,8 @@ namespace WebApplicationHamburgueriaMvc.Controllers
             }
             else
             {
-                if (string.Equals("Normal", categoria, StringComparison.OrdinalIgnoreCase))
-                {
-                    lanches = _lancheRepository.Lanches.Where(lanche => lanche.Categoria.CategoriaNome.Equals("Normal")).OrderBy(lanche => lanche.Nome);
-                    categoriaAtual = "Normal";
-                }
-                else if (string.Equals("Natural", categoria, StringComparison.OrdinalIgnoreCase))
-                {
-                    lanches = _lancheRepository.Lanches.Where(lanche => lanche.Categoria.CategoriaNome.Equals("Natural")).OrderBy(lanche => lanche.Nome);
-                    categoriaAtual = "Natural";
-                }
+                lanches = _lancheRepository.Lanches.Where(lanche => lanche.Categoria.CategoriaNome.Equals(categoria));
+                categoriaAtual = categoria;
             }
 
             var lanchesListViewModel = new LancheListViewModel
