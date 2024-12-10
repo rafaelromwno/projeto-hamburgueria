@@ -23,7 +23,8 @@ namespace WebApplicationHamburgueriaMvc
             
             services.AddTransient<ILancheRepository, LancheRepository>();
             services.AddTransient<ICategoriaRepository, CategoriaRepository>();
-            
+            services.AddTransient<IPedidoRepository, PedidoRepository>();
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddScoped(isp => CarrinhoCompra.GetCarrinho(isp));
