@@ -37,5 +37,17 @@ namespace WebApplicationHamburgueriaMvc.Controllers
 
             return View(lanchesListViewModel);
         }
+
+        public IActionResult Details(int lancheId)
+        {
+            var lanche = _lancheRepository.Lanches.FirstOrDefault(l => l.LancheId == lancheId);
+
+            if (lanche == null)
+            {
+                return NotFound();
+            }
+
+            return View(lanche);
+        }
     }
 }

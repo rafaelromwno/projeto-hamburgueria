@@ -1,16 +1,34 @@
 ﻿@model Lanche
 
-<div class="col-md-4 mb-4">
+<div class="col-sm-12 col-md-6 col-lg-4 mb-4">
     <div class="card h-100 shadow-sm">
-        <img src="@Model.ImagemUrl" class="card-img-top" alt="Imagem de @Model.Nome, Descrição: @Model.DescricaoCurta">
-        <div class="card-body">
-            <h5 class="card-title">@Model.Nome</h5>
-            <p class="card-text">
-                @Model.DescricaoCurta
-            </p>
-            <p class="card-text">
-                <strong>Preço:</strong> @Model.Preco.ToString("c")
-            </p>
+        <!-- Imagem do lanche -->
+        <img src="@Model.ImagemUrl" class="card-img-top img-fluid" alt="@Model.Nome">
+
+        <!-- Corpo do card -->
+        <div class="card-body d-flex flex-column">
+            <!-- Nome do lanche -->
+            <h5 class="card-title">
+                <a asp-controller="Lanche" asp-action="Details"
+                   asp-route-lancheId="@Model.LancheId" class="text-decoration-none text-dark">
+                    @Model.Nome
+                </a>
+            </h5>
+
+            <!-- Descrição curta -->
+            <p class="card-text text-muted">@Model.DescricaoCurta</p>
+
+            <!-- Preço -->
+            <h6 class="card-subtitle mb-2 text-success">Preço: @Model.Preco.ToString("c")</h6>
+
+            <!-- Botão para adicionar ao carrinho -->
+            <div class="mt-auto">
+                <a class="btn btn-primary w-100" asp-controller="CarrinhoCompra"
+                   asp-action="AdicionarItemNoCarrinhoCompra"
+                   asp-route-LancheId="@Model.LancheId">
+                    Incluir no Carrinho
+                </a>
+            </div>
         </div>
     </div>
 </div>
