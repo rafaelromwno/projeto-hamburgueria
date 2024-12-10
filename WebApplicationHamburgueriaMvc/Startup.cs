@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApplicationHamburgueriaMvc.Context;
 using WebApplicationHamburgueriaMvc.Models;
 using WebApplicationHamburgueriaMvc.Repositories;
@@ -58,8 +59,15 @@ namespace WebApplicationHamburgueriaMvc
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "categoriaFiltro",
+                    pattern: "Lanche/{action}/{categoria?}",
+                    defaults: new { Controller = "Lanche", Action = "List" }
+                    );
+
+                endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");              
+                
             });
         }
     }
