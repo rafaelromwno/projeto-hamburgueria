@@ -1,0 +1,113 @@
+﻿@model Pedido
+
+<h3 class="text-center">Você está a um passo de completar o seu pedido</h3>
+<hr />
+<form asp-action="Checkout" method="post" class="needs-validation" novalidate>
+    <div class="row">
+        <!-- Nome -->
+        <div class="col-md-6 mb-3">
+            <label asp-for="Nome" class="form-label">Nome</label>
+            <input asp-for="Nome" class="form-control" required />
+            <div class="invalid-feedback">
+                Por favor, insira seu nome.
+            </div>
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
+
+        <!-- Sobrenome -->
+        <div class="col-md-6 mb-3">
+            <label asp-for="Sobrenome" class="form-label">Sobrenome</label>
+            <input asp-for="Sobrenome" class="form-control" required />
+            <div class="invalid-feedback">
+                Por favor, insira seu sobrenome.
+            </div>
+            <span asp-validation-for="Sobrenome" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Endereço 1 -->
+        <div class="col-md-6 mb-3">
+            <label asp-for="Endereco1" class="form-label">Endereço</label>
+            <input asp-for="Endereco1" class="form-control" required />
+            <div class="invalid-feedback">
+                Por favor, insira o seu endereço.
+            </div>
+            <span asp-validation-for="Endereco1" class="text-danger"></span>
+        </div>
+
+        <!-- Endereço 2 -->
+        <div class="col-md-6 mb-3">
+            <label asp-for="Endereco2" class="form-label">Complemento</label>
+            <input asp-for="Endereco2" class="form-control" />
+            <span asp-validation-for="Endereco2" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- CEP -->
+        <div class="col-md-4 mb-3">
+            <label asp-for="Cep" class="form-label">CEP</label>
+            <input asp-for="Cep" class="form-control" required />
+            <div class="invalid-feedback">
+                Por favor, insira seu CEP.
+            </div>
+            <span asp-validation-for="Cep" class="text-danger"></span>
+        </div>
+
+        <!-- Cidade -->
+        <div class="col-md-4 mb-3">
+            <label asp-for="Cidade" class="form-label">Cidade</label>
+            <input asp-for="Cidade" class="form-control" value="Lins" required />
+            <div class="invalid-feedback">
+                Por favor, insira sua cidade.
+            </div>
+            <span asp-validation-for="Cidade" class="text-danger"></span>
+        </div>
+
+        <!-- Estado -->
+        <div class="col-md-4 mb-3">
+            <label asp-for="Estado" class="form-label">Estado</label>
+            <input asp-for="Estado" class="form-control" value="São Paulo" required />
+            <div class="invalid-feedback">
+                Por favor, insira seu estado.
+            </div>
+            <span asp-validation-for="Estado" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Telefone -->
+        <div class="col-md-6 mb-3">
+            <label asp-for="Telefone" class="form-label">Telefone</label>
+            <input asp-for="Telefone" class="form-control" required />
+            <div class="invalid-feedback">
+                Por favor, insira seu telefone.
+            </div>
+            <span asp-validation-for="Telefone" class="text-danger"></span>
+        </div>
+
+        <!-- E-mail -->
+        <div class="col-md-6 mb-3">
+            <label asp-for="Email" class="form-label">E-mail</label>
+            <input asp-for="Email" class="form-control" required />
+            <div class="invalid-feedback">
+                Por favor, insira seu e-mail.
+            </div>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+
+    <!-- Ações -->
+    <div class="row">
+        <!-- Botão de envio -->
+        <div class="col-md-6 mb-3">
+            <button class="btn btn-success w-100" type="submit">Concluir Pedido</button>
+        </div>
+
+        <!-- Botão de retorno ao carrinho -->
+        <div class="col-md-6 mb-3">
+            <a class="btn btn-outline-info w-100" asp-controller="CarrinhoCompra" asp-action="Index">Retornar ao Carrinho</a>
+        </div>
+    </div>
+</form>
