@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,15 +25,10 @@
                     <a class="nav-link text-light" asp-area="" asp-controller="Contato" asp-action="Index">Contato</a>
 
                     <form class="d-flex justify-content-end" asp-controller="Lanche" asp-action="Search" method="get">
-                        <div class="input-group w-50">
+                        <div class="input-group">
                             <!-- Campo de Busca -->
                             <input type="text" class="form-control" placeholder="Procurar produto" name="searchString"
                                    value="@ViewData["searchString"]" aria-label="Procurar produto" aria-describedby="searchButton">
-
-                            <!-- Botão de Pesquisa -->
-                            <button class="btn btn-outline-primary" type="submit" id="searchButton">
-                                <i class="bi bi-search"></i> <!-- Ícone de pesquisa -->
-                            </button>
                         </div>
                     </form>
 
