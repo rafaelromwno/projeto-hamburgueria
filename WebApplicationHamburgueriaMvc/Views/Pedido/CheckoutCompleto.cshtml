@@ -1,0 +1,50 @@
+﻿@model Pedido
+
+<div class="container my-5">
+    <div class="jumbotron text-center bg-light p-4 rounded">
+        <h2 class="text-success">@ViewBag.CheckoutCompletoMensagem</h2>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="mb-4">Detalhes do Pedido</h5>
+            <p><strong>Cliente:</strong> @Model.Nome</p>
+            <p><strong>Data do Pedido:</strong> @Model.PedidoEnviado.ToString("dd/MM/yyyy HH:mm")</p>
+            <p><strong>Número do Pedido:</strong> @Model.PedidoId</p>
+
+            <div class="table-responsive my-4">
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Imagem</th>
+                            <th>Quantidade</th>
+                            <th>Lanche</th>
+                            <th>Preço</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.PedidoItens)
+                        {
+                            <tr>
+                                <td>
+                                    <img src="@item.Lanche.ImagemUrl" class="img-fluid rounded" alt="@item.Lanche.Nome" style="width: 40px; height: 40px;">
+                                </td>
+                                <td>@item.Quantidade</td>
+                                <td>@item.Lanche.Nome</td>
+                                <td>@item.Lanche.Preco.ToString("C2")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="text-end">
+                Valor Total do Pedido: <strong class="text-success">@(((decimal)ViewBag.TotalPedido).ToString("C2"))</strong>
+            </h4>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a class="btn btn-outline-info" asp-controller="Home" asp-action="Index">Retornar à Página Inicial</a>
+    </div>
+</div>
