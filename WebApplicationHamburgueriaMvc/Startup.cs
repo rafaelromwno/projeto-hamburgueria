@@ -5,6 +5,7 @@ using WebApplicationHamburgueriaMvc.Context;
 using WebApplicationHamburgueriaMvc.Models;
 using WebApplicationHamburgueriaMvc.Repositories;
 using WebApplicationHamburgueriaMvc.Repositories.Interfaces;
+using WebApplicationHamburgueriaMvc.Services;
 
 namespace WebApplicationHamburgueriaMvc
 {
@@ -40,10 +41,19 @@ namespace WebApplicationHamburgueriaMvc
             services.AddTransient<ILancheRepository, LancheRepository>();
             services.AddTransient<ICategoriaRepository, CategoriaRepository>();
             services.AddTransient<IPedidoRepository, PedidoRepository>();
-
+            
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddScoped(isp => CarrinhoCompra.GetCarrinho(isp));
+            services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Admin", politica =>
+                {
+                    politica.RequireRole("Admin");
+                });
+            });
 
             services.AddControllersWithViews();
 
@@ -52,7 +62,7 @@ namespace WebApplicationHamburgueriaMvc
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ISeedUserRoleInitial seedUserRoleInitial)
         {
             if (env.IsDevelopment())
             {
@@ -69,6 +79,9 @@ namespace WebApplicationHamburgueriaMvc
 
             app.UseRouting();
 
+            seedUserRoleInitial.SeedRoles(); // criar os perfis
+            seedUserRoleInitial.SeedUsers(); // criar usuarios e atribuir aos perfis
+
             app.UseSession();
 
             app.UseAuthentication();
@@ -76,6 +89,12 @@ namespace WebApplicationHamburgueriaMvc
 
             app.UseEndpoints(endpoints =>
             {
+
+                endpoints.MapControllerRoute(
+                  name: "areas",
+                  pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}"
+                );
+
                 endpoints.MapControllerRoute(
                     name: "categoriaFiltro",
                     pattern: "Lanche/{action}/{categoria?}",
