@@ -33,12 +33,17 @@ namespace WebApplicationHamburgueriaMvc.Controllers
             }
 
             var user = await _userManager.FindByNameAsync(loginVM.UserName);
-
-            if (user != null)
+            if (user == null)
             {
-                var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
+                ModelState.AddModelError("", "Credenciais inválidas.");
+                return View(loginVM);
+            }
 
-                if (result.Succeeded && string.IsNullOrEmpty(loginVM.ReturnUrl))
+            var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
+            if (result.Succeeded)
+            {
+                // Valida o ReturnUrl para evitar open redirects
+                if (string.IsNullOrEmpty(loginVM.ReturnUrl) || !Url.IsLocalUrl(loginVM.ReturnUrl))
                 {
                     return RedirectToAction("Index", "Home");
                 }
@@ -46,10 +51,11 @@ namespace WebApplicationHamburgueriaMvc.Controllers
                 return Redirect(loginVM.ReturnUrl);
             }
 
-            ModelState.AddModelError("", "Falha ao realizar o login!");
-
+            // Para evitar informações detalhadas sobre o motivo da falha
+            ModelState.AddModelError("", "Credenciais inválidas.");
             return View(loginVM);
         }
+
 
         [HttpGet]
         public IActionResult Register(string returnUrl)
@@ -72,6 +78,8 @@ namespace WebApplicationHamburgueriaMvc.Controllers
 
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "Member");
+
                     return RedirectToAction("Login", "Account");
                 }
                 else
@@ -92,6 +100,11 @@ namespace WebApplicationHamburgueriaMvc.Controllers
             await _signInManager.SignOutAsync();
 
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }
