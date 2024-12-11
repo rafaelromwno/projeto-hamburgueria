@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebApplicationHamburgueriaMvc.Models;
 using WebApplicationHamburgueriaMvc.Repositories.Interfaces;
 using WebApplicationHamburgueriaMvc.ViewModels;
@@ -31,6 +32,7 @@ namespace WebApplicationHamburgueriaMvc.Controllers
             return View(carrinhoCompraVM);
         }
 
+        [Authorize]
         public RedirectToActionResult AdicionarItemNoCarrinhoCompra(int lancheId)
         {
             var lancheSelecionado = _lancheRepository.Lanches
@@ -44,6 +46,7 @@ namespace WebApplicationHamburgueriaMvc.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize]
         public RedirectToActionResult RemoverItemDoCarrinhoCompra(int lancheId)
         {
             var lancheSelecionado = _lancheRepository.Lanches
