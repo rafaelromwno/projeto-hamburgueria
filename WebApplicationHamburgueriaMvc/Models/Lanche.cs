@@ -47,6 +47,7 @@ namespace WebApplicationHamburgueriaMvc.Models
         public bool EmEstoque { get; set; }
 
         //Propriedade de Navegação -> Define o relacionamento entre as entidades (Convenção do Entity Framework Core)
+        [Display(Name = "Categoria")]
         public int CategoriaId { get; set; }
         public virtual Categoria Categoria { get; set; }
 
