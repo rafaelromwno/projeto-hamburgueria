@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using ReflectionIT.Mvc.Paging;
 using WebApplicationHamburgueriaMvc.Context;
 using WebApplicationHamburgueriaMvc.Models;
+using WebApplicationHamburgueriaMvc.ViewModels;
 
 namespace WebApplicationHamburgueriaMvc.Areas.Admin.Controllers
 {
@@ -171,6 +172,29 @@ namespace WebApplicationHamburgueriaMvc.Areas.Admin.Controllers
         private bool PedidoExists(int id)
         {
           return _context.Pedidos.Any(e => e.PedidoId == id);
+        }
+
+        public IActionResult PedidoLanches(int? id)
+        {
+            var pedido = _context.Pedidos
+                        .Include(pedido => pedido.PedidoItens)
+                        .ThenInclude(pedidoDetalhe => pedidoDetalhe.Lanche)
+                        .FirstOrDefault(pedido => pedido.PedidoId == id);
+
+            if(pedido == null)
+            {
+                Response.StatusCode = 404;
+
+                return View("PedidoNotFound", id.Value);
+            }
+
+            PedidoLancheViewModel pedidoLanches = new PedidoLancheViewModel()
+            {
+                Pedido = pedido,
+                PedidoDetalhes = pedido.PedidoItens
+            };
+
+            return View(pedidoLanches);
         }
     }
 }

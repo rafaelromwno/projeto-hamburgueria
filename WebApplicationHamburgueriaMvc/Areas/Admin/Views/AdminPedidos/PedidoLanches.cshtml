@@ -1,0 +1,50 @@
+﻿@model WebApplicationHamburgueriaMvc.ViewModels.PedidoLancheViewModel
+
+@{
+    ViewData["Title"] = "Lanches do Pedido";
+    decimal totalPedido = 0;
+}
+
+<h1 class="mb-4">Lanches do Pedido</h1>
+<hr />
+
+<div class="mb-4">
+    <p><strong>Pedido:</strong> @Model.Pedido.PedidoId</p>
+    <p><strong>Cliente:</strong> @Model.Pedido.Nome</p>
+    <p><strong>Data:</strong> @Model.Pedido.PedidoEnviado</p>
+    <p><strong>Entrega:</strong> @Model.Pedido.PedidoEntregueEm</p>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nome do Lanche</th>
+            <th>Imagem</th>
+            <th>Preço Unitário</th>
+            <th>Quantidade</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in @Model.Pedido.PedidoItens)
+        {
+            totalPedido += (item.Lanche.Preco * item.Quantidade);
+            <tr>
+                <td class="align-middle">@item.Lanche.Nome</td>
+                <td class="align-middle">
+                    <img src="@item.Lanche.ImagemUrl" class="img-thumbnail" alt="@item.Lanche.Nome" style="height: 100px; width: 100px;">
+                </td>
+                <td class="align-middle">@item.Lanche.Preco.ToString("C")</td>
+                <td class="align-middle">@item.Quantidade</td>
+            </tr>
+        }
+        <tr class="table-success">
+            <td colspan="2"></td>
+            <td class="text-end"><strong>Total do Pedido:</strong></td>
+            <td class="text-end">@totalPedido.ToString("C")</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="mt-4">
+    <a asp-action="Index" class="btn btn-outline-info">Retornar</a>
+</div>

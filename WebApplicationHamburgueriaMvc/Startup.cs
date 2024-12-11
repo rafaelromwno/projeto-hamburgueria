@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ReflectionIT.Mvc.Paging;
+using WebApplicationHamburgueriaMvc.Areas.Admin.AdminServices;
 using WebApplicationHamburgueriaMvc.Context;
 using WebApplicationHamburgueriaMvc.Models;
 using WebApplicationHamburgueriaMvc.Repositories;
@@ -47,6 +48,7 @@ namespace WebApplicationHamburgueriaMvc
 
             services.AddScoped(isp => CarrinhoCompra.GetCarrinho(isp));
             services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
+            services.AddScoped<RelatoriosVendasService>();
 
             services.AddAuthorization(options =>
             {
