@@ -32,3 +32,33 @@ Esta aplicação web de vendas de lanches foi desenvolvida utilizando o **ASP.NE
 - LINQ
 - GoogleChart
 - FastReport OpenSource
+
+# Convenção de Commits
+
+Este projeto segue a convenção de commits **Conventional Commits** para manter um histórico claro, padronizado e facilitando a automação de tarefas como geração de changelogs e versionamento semântico.
+
+## Padrão de Commit
+
+A mensagem de commit deve seguir o formato:
+
+"<tipo>: <descrição>"
+
+
+### Componentes da Mensagem de Commit
+
+1. **`<tipo>`**: Define a natureza da mudança. Exemplo:
+   - **`feat`**: Nova funcionalidade.
+   - **`fix`**: Correção de bug.
+   - **`docs`**: Atualizações na documentação.
+   - **`style`**: Alterações que não afetam a lógica do código (ex.: formatação, espaçamento).
+   - **`refactor`**: Modificação no código sem alteração na funcionalidade.
+   - **`test`**: Alterações ou adições nos testes.
+   - **`chore`**: Atualizações administrativas (ex.: dependências, configurações).
+   - **`perf`**: Melhoria de desempenho.
+   - **`build`**: Alterações no sistema de build (scripts, CI/CD).
+   - **`ci`**: Alterações em configurações de integração contínua.
+   - **`revert`**: Revertendo um commit anterior.
+
+2. **`<descrição>`**: Um resumo conciso da mudança realizada. Use frases curtas e claras.
+
+

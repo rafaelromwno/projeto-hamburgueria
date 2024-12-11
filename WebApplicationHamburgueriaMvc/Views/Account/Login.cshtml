@@ -1,0 +1,30 @@
+﻿@model LoginViewModel
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="text-center mb-4">
+                <img src="~/images/login_48.png" alt="Fazer o Login" class="img-fluid" />
+                <h4 class="mt-3">Login</h4>
+            </div>
+            <form asp-controller="Account" asp-action="Login" method="post" class="needs-validation" novalidate>
+                <hr />
+                <div asp-validation-summary="All" class="text-danger mb-3"></div>
+                <input type="hidden" asp-for="ReturnUrl" />
+                <div class="mb-3">
+                    <label asp-for="UserName" class="form-label">Usuário</label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label">Senha</label>
+                    <input asp-for="Password" type="password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-success">Entrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
