@@ -39,14 +39,7 @@ Este projeto segue a convenção de commits **Conventional Commits** para manter
 
 ## Padrão de Commit
 
-A mensagem de commit deve seguir o formato:
-
-"<tipo>: <descrição>"
-
-
-### Componentes da Mensagem de Commit
-
-1. **`<tipo>`**: Define a natureza da mudança. Exemplo:
+**`<tipo>`**: Define a natureza da mudança. Exemplo:
    - **`feat`**: Nova funcionalidade.
    - **`fix`**: Correção de bug.
    - **`docs`**: Atualizações na documentação.
@@ -59,6 +52,5 @@ A mensagem de commit deve seguir o formato:
    - **`ci`**: Alterações em configurações de integração contínua.
    - **`revert`**: Revertendo um commit anterior.
 
-2. **`<descrição>`**: Um resumo conciso da mudança realizada. Use frases curtas e claras.
-
+2. **`<descrição>`**: Um resumo conciso da mudança realizada. 
 
