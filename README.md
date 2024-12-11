@@ -37,14 +37,7 @@ Esta aplicação web de vendas de lanches foi desenvolvida utilizando o **ASP.NE
 
 Este projeto segue a convenção de commits **Conventional Commits** para manter um histórico claro, padronizado e facilitando a automação de tarefas como geração de changelogs e versionamento semântico.
 
-## Padrão de Commit
-
-A mensagem de commit deve seguir o formato:
-
-"<tipo>: <descrição>"
-
-
-### Componentes da Mensagem de Commit
+## Componentes da Mensagem de Commit
 
  **`<tipo>`**: Define a natureza da mudança. Exemplo:
    - **`feat`**: Nova funcionalidade.
