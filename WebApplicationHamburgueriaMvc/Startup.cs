@@ -51,6 +51,7 @@ namespace WebApplicationHamburgueriaMvc
             services.AddScoped(isp => CarrinhoCompra.GetCarrinho(isp));
             services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
             services.AddScoped<RelatoriosVendasService>();
+            services.AddScoped<GraficoVendasService>();
 
             services.AddAuthorization(options =>
             {

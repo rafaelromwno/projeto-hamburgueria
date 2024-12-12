@@ -1,0 +1,62 @@
+﻿<title>@ViewData["Title"] - Gráfico de Vendas</title>
+
+<!-- Google Charts Loader -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<!-- Chart Container -->
+<div id="chart_div" style="width: 900px; height: 500px;"></div>
+
+<script type="text/javascript">
+
+    // Carregando a biblioteca do Google Charts
+    google.charts.load('current', { packages: ['corechart', 'bar'] });
+    google.charts.setOnLoadCallback(loadChartData);
+
+    // Função para carregar os dados via AJAX
+    function loadChartData() {
+        $.ajax({
+            url: '@Url.Action("VendasLanches", "AdminGrafico")',
+            data: { dias: 360 },
+            dataType: "json",
+            type: "GET",
+            error: function (xhr) {
+                const errorResponse = JSON.parse(xhr.responseText);
+                toastr.error(errorResponse.message, "Erro ao carregar dados");
+            },
+            success: function (data) {
+                drawSalesChart(data);
+            }
+        });
+    }
+
+    // Função para desenhar o gráfico
+    function drawSalesChart(data) {
+        const dataArray = [['Lanche', 'Quantidade', 'Valores (R$)']];
+        
+        // Montando os dados do gráfico
+        data.forEach(item => {
+            dataArray.push([item.lancheNome, item.lanchesQuantidade, item.lanchesValorTotal]);
+        });
+
+        // Transformando os dados em formato de DataTable
+        const chartData = google.visualization.arrayToDataTable(dataArray);
+
+        // Configurações do gráfico
+        const options = {
+            title: 'Lanches - Vendas nos últimos 360 dias',
+            chartArea: { width: '70%' },
+            colors: ['#5202b5', '#d2a828'],
+            hAxis: {
+                title: 'Valor Total (em Reais)',
+                minValue: 0,
+                format: 'currency'
+            },
+            vAxis: { title: 'Lanches' },
+            bar: { groupWidth: '70%' }
+        };
+
+        // Renderizando o gráfico
+        const chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        chart.draw(chartData, options);
+    }
+</script>
