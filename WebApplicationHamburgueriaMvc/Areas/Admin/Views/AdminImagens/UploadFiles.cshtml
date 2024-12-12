@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Upload de Arquivos";
+}
+
+<div class="text-center my-4">
+    <img src="~/images/upload2.png" class="img-fluid rounded" width="200" height="150" alt="Upload de Arquivos">
+</div>
+<hr />
+
+<div class="jumbotron jumbotron-fluid py-4">
+    <div class="container">
+        @if (ViewData["Erro"] != null)
+        {
+            <div class="text-center">
+                <img src="~/images/erro1.png" class="img-fluid" width="150" height="150" alt="Erro">
+                <h4 class="text-danger mt-3">@ViewData["Erro"]</h4>
+            </div>
+        }
+    </div>
+
+    <div class="container mt-4">
+        @if (ViewData["Resultado"] != null)
+        {
+            <h4 class="text-success">@ViewData["Resultado"]</h4>
+            <hr />
+            @if (ViewBag.Arquivos != null)
+            {
+                <ul class="list-group list-group-flush">
+                    @foreach (string arquivo in ViewBag.Arquivos)
+                    {
+                        <li class="list-group-item">
+                            @arquivo
+                        </li>
+                    }
+                </ul>
+            }
+        }
+    </div>
+</div>
+
+<div class="text-center mt-4">
+    <a class="btn btn-outline-info btn-lg" asp-controller="AdminImagens" asp-action="GetImagens">Exibir Imagens</a>
+</div>
