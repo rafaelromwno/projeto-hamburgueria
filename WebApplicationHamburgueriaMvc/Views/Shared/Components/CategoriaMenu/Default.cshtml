@@ -1,28 +1,40 @@
 ﻿<div class="dropdown">
+    <!-- Botão do Dropdown -->
     <a class="btn btn-secondary dropdown-toggle"
        id="dropdownMenuLink"
        data-bs-toggle="dropdown"
-       aria-expanded="false">
+       aria-expanded="false"
+       aria-haspopup="true">
         Lanches
     </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+
+    <!-- Lista de Categorias -->
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink" role="menu">
         @foreach (var categoria in Model)
         {
-            <li>
+            <li role="none">
                 <a class="dropdown-item text-dark"
                    asp-controller="Lanche"
                    asp-action="List"
-                   asp-route-categoria="@categoria.CategoriaNome">
+                   asp-route-categoria="@categoria.CategoriaNome"
+                   role="menuitem"
+                   aria-label="@categoria.CategoriaNome">
                     @categoria.CategoriaNome
                 </a>
             </li>
         }
+
+        <!-- Separador -->
         <li><hr class="dropdown-divider"></li>
-        <li>
+
+        <!-- Todos os Lanches -->
+        <li role="none">
             <a class="dropdown-item text-dark"
                asp-controller="Lanche"
                asp-action="List"
-               asp-route-categoria="">
+               asp-route-categoria=""
+               role="menuitem"
+               aria-label="Todos os Lanches">
                 Todos os Lanches
             </a>
         </li>
