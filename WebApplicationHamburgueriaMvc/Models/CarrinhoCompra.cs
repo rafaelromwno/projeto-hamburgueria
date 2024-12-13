@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using WebApplicationHamburgueriaMvc.Context;
+using WebApplicationHamburgueriaMvc.Migrations;
 
 namespace WebApplicationHamburgueriaMvc.Models
 {
@@ -89,11 +90,25 @@ namespace WebApplicationHamburgueriaMvc.Models
 
         public List<CarrinhoCompraItem> GetCarrinhoCompraItens()
         {
-            return CarrinhoCompraItens ?? 
+            /*return CarrinhoCompraItens ?? 
                 (CarrinhoCompraItens = _context.CarrinhoCompraItens
                 .Where(cci => cci.CarrinhoCompraId == CarrinhoCompraId)
                 .Include(cci => cci.Lanche)
-                .ToList());
+                .ToList());*/
+
+            if (CarrinhoCompraItens != null)
+            {
+                return CarrinhoCompraItens;
+            }
+            else
+            {
+                CarrinhoCompraItens = _context.CarrinhoCompraItens
+                                     .Where(c => c.CarrinhoCompraId == CarrinhoCompraId)
+                                     .Include(s => s.Lanche)
+                                     .ToList();
+
+                return CarrinhoCompraItens;
+            }
         }
 
         public void LimparCarrinho()

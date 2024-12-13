@@ -1,5 +1,9 @@
 ﻿@model Pedido
 
+@{
+    ViewData["Title"] = "Pedido";
+}
+
 <h3 class="text-center">Você está a um passo de completar o seu pedido</h3>
 <hr />
 <form asp-action="Checkout" method="post" class="needs-validation" novalidate>

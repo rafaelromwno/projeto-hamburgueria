@@ -6,9 +6,9 @@ namespace WebApplicationHamburgueriaMvc.Areas.Admin.Controllers
     [Area("Admin")]
     public class AdminRelatorioVendasController : Controller
     {
-        private readonly RelatoriosVendasService _relatoriosVendasService;
+        private readonly RelatorioVendasService _relatoriosVendasService;
 
-        public AdminRelatorioVendasController(RelatoriosVendasService relatoriosVendasService)
+        public AdminRelatorioVendasController(RelatorioVendasService relatoriosVendasService)
         {
             _relatoriosVendasService = relatoriosVendasService;
         }

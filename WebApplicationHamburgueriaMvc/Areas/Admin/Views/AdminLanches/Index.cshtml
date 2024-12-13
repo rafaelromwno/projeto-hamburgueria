@@ -23,6 +23,8 @@
 
 <p>
     <a class="btn btn-success" asp-action="Create">Criar Novo Lanche</a>
+    <a class="btn btn-success" asp-controller="AdminLanchesReport" asp-action="LanchesCategoriaReport">Gerar Relatório</a>
+    <a class="btn btn-success" asp-controller="AdminLanchesReport" asp-action="LanchesCategoriaPDF" target="_blank">Gerar PDF</a>    
 </p>
 
 <div class="table-responsive">
@@ -51,7 +53,7 @@
                     <td>
                         <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@item.LancheId">Editar</a>
                         <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.LancheId">Detalhes</a>
-                        <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.LancheId">Excluir</a>
+                        <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.LancheId">Excluir</a>                        
                     </td>
                 </tr>
             }
